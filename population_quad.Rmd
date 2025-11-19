@@ -1,0 +1,37 @@
+
+## Calgary's Population by Quadrant (as of 2017)
+
+```{r}
+#Dataset
+data = read.csv("Historical_Community_Populations_20251118.csv")
+```
+
+
+```{r}
+table(data$quadrant)
+```
+
+```{r}
+# create dataframe NE
+
+df = data.frame(
+  num = 1:199
+  NE = data$quadrant
+)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### Sources: 
+https://data.calgary.ca/Demographics/Historical-Calgary-Community-Populations/4mgk-hrwr
