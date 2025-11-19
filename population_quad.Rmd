@@ -2,7 +2,15 @@
 ## Calgary's Population by Quadrant (as of 2017)
 
 ```{r}
-#Dataset
+# Libraries
+
+install.packages("dplyr")
+library(dplyr)
+```
+
+
+```{r}
+# Dataset
 data = read.csv("Historical_Community_Populations_20251118.csv")
 ```
 
@@ -12,15 +20,21 @@ table(data$quadrant)
 ```
 
 ```{r}
-# create dataframe NE
-
-df = data.frame(
-  num = 1:199
-  NE = data$quadrant
+# create dataframe
+dataframe = data.frame(
+  population = data$population,
+  quadrants = data$quadrant
 )
+
+# note: dataframe is already clean
 ```
 
 
+```{r}
+quadrant_pop = dataframe %>% group_by(quadrants) %>% summarise(sum_pop = sum(population))
+
+quadrant_pop
+```
 
 
 
