@@ -1,20 +1,16 @@
-
 ## Calgary's Population by Quadrant (as of 2017)
 
 ```{r}
 # Libraries
-install.packages("dplyr")
+install.packages ("dplyr")
 library(dplyr)
 library(ggplot2)
 ```
-
 
 ```{r}
 # Load dataset
 data = read.csv("Historical_Community_Populations_20251118.csv")
 ```
-
-
 
 ```{r}
 # Create dataframe
@@ -29,14 +25,10 @@ dataframe = data.frame(
 dataframe$population = gsub(",", "", dataframe$population)
 ```
 
-
 ```{r}
 # Convert column 'population' to numeric
 dataframe$population = as.numeric(dataframe$population)
 ```
-
-
-
 
 ```{r}
 # Group populations by quadrant then get the sum of populations for each quadrant
@@ -45,7 +37,6 @@ quadrant_populations = dataframe %>%
   summarise(sum_population = sum(population))
 quadrant_populations
 ```
-
 
 ```{r}
 # Set variables
@@ -60,20 +51,18 @@ graph = ggplot(data = quadrant_populations, aes(x = quadrants, y = sum_populatio
 graph + coord_flip() + ylim(0,400000) + xlab("Quadrants") + ylab("Population")
 ```
 
+### Results
 
-
-### Results:
-
-Ranking the populations by quadrants
+Ranking the populations by quadrant:
 
 1st: NW
+
 2nd: SW
+
 3rd: SE
+
 4th: NE
 
+#### Source:
 
-
-
-
-#### Source: 
-https://data.calgary.ca/Demographics/Historical-Calgary-Community-Populations/4mgk-hrwr
+<https://data.calgary.ca/Demographics/Historical-Calgary-Community-Populations/4mgk-hrwr>
