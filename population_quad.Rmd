@@ -3,40 +3,55 @@
 
 ```{r}
 # Libraries
-
 install.packages("dplyr")
 library(dplyr)
+library(ggplot2)
 ```
 
 
 ```{r}
-# Dataset
+# Load dataset
 data = read.csv("Historical_Community_Populations_20251118.csv")
 ```
 
 
-```{r}
-table(data$quadrant)
-```
 
 ```{r}
-# create dataframe
+# Create dataframe
 dataframe = data.frame(
   population = data$population,
   quadrants = data$quadrant
 )
+```
 
-# note: dataframe is already clean
+```{r}
+# Clean dataframe (remove commas)
+dataframe$population = gsub(",", "", dataframe$population)
 ```
 
 
 ```{r}
-quadrant_pop = dataframe %>% group_by(quadrants) %>% summarise(sum_pop = sum(population))
-
-quadrant_pop
+# Convert column 'population' to numeric
+dataframe$population = as.numeric(dataframe$population)
 ```
 
 
+
+
+```{r}
+# Group populations by quadrant then get the sum of populations for each quadrant
+quadrant_populations = dataframe %>% 
+  group_by(quadrants) %>% 
+  summarise(sum_population = sum(population))
+```
+
+
+```{r}
+# Data Visualization
+ggplot(quadrant_populations, aes(x = quadrants, y = population)) + geom_bar(color = "purple4")
+
+
+```
 
 
 
