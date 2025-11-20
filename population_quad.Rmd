@@ -43,24 +43,37 @@ dataframe$population = as.numeric(dataframe$population)
 quadrant_populations = dataframe %>% 
   group_by(quadrants) %>% 
   summarise(sum_population = sum(population))
+quadrant_populations
 ```
 
 
 ```{r}
+# Set variables
+quadrants = quadrant_populations$quadrants
+sum_population = quadrant_populations$sum_population
+
+
 # Data Visualization
-ggplot(quadrant_populations, aes(x = quadrants, y = population)) + geom_bar(color = "purple4")
+graph = ggplot(data = quadrant_populations, aes(x = quadrants, y = sum_population)) + geom_bar(stat = "identity", fill = "purple4") + ggtitle("Population for Each Quadrant in Calgary")
 
-
+# Display graph
+graph + coord_flip() + ylim(0,400000) + xlab("Quadrants") + ylab("Population")
 ```
 
 
 
+### Results:
+
+Ranking the populations by quadrants
+
+1st: NW
+2nd: SW
+3rd: SE
+4th: NE
 
 
 
 
 
-
-
-#### Sources: 
+#### Source: 
 https://data.calgary.ca/Demographics/Historical-Calgary-Community-Populations/4mgk-hrwr
