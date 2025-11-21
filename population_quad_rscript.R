@@ -47,7 +47,6 @@ graph
 
 # Results
 
-
 # Ranking the populations by quadrant:
   
 # 1st: NW
